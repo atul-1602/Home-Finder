@@ -22,17 +22,25 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
               <li className="nav-item ">
-                <Link className="nav-link text-light " aria-current="page" to="/">
+                <Link
+                  className="nav-link text-light "
+                  aria-current="page"
+                  to="/"
+                >
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-light" aria-current="page" to="#">
+                <Link
+                  className="nav-link text-light"
+                  aria-current="page"
+                  to="#"
+                >
                   Pricing
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-light" to="/findhome">
+                <Link className="nav-link text-light" to="/">
                   Find Home
                 </Link>
               </li>
@@ -120,15 +128,7 @@ const Navbar = () => {
                 </button>
               </form>
             </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -166,7 +166,6 @@ const Navbar = () => {
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                   />
-                 
                 </div>
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">
@@ -206,15 +205,7 @@ const Navbar = () => {
                 </button>
               </form>
             </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
+            
           </div>
         </div>
       </div>

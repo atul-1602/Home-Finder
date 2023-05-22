@@ -1,10 +1,14 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import AOS from "aos";
+import 'aos/dist/aos.css'
 const Contact = () => {
+  useEffect(()=>{
+    AOS.init({duration: 1000});
+  },[])
   return (
     <>
-      <form className="d-flex flex-column justifly-content-center align-items-center  m-4 ">
-        <div className="w-50  shadow-lg p-3 mb-5 bg-white rounded d-flex flex-column justifly-content-center align-items-center ">
+      <form className="d-flex flex-column justifly-content-center align-items-center  m-4 " data-aos="fade-up">
+        <div className="w-50  shadow-lg p-3 mb-5 bg-white rounded d-flex flex-column justifly-content-center align-items-center " data-aos="fade-up">
           <h3 className="text-danger h1 text-align-center m-4 ">
             Feel free to reach us
           </h3>

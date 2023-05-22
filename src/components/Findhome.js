@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+// import AOS from "aos";
+// import 'aos/dist/aos.css'
+
 const Findhome = () => {
-  const [data,setData]=useState([])
+  // useEffect(()=>{
+  //   AOS.init({duration: 1000});
+  // },[])
+
+  const [data, setData] = useState([]);
   const [records, setRecords] = useState([]);
 
-  useEffect(()=>{
-    axios.get('https://mocki.io/v1/94768134-75c0-4cc0-a0bd-496a53a19800')
-    .then(res=>{
-      setData(res.data)
-      setRecords(res.data);
-    }).catch(err=>console.log(err));
-  },[])
+  useEffect(() => {
+    axios
+      .get("https://mocki.io/v1/94768134-75c0-4cc0-a0bd-496a53a19800")
+      .then((res) => {
+        setData(res.data);
+        setRecords(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const Filter1 = (event) => {
     setRecords(
@@ -21,7 +30,6 @@ const Findhome = () => {
     setRecords(
       records.filter((f) => f.for.toLowerCase().includes(event.target.value))
     );
-    
   };
   const Filter3 = (event) => {
     setRecords(
@@ -43,7 +51,7 @@ const Findhome = () => {
               placeholder="location..."
               aria-label="Search"
               aria-describedby="search-addon"
-             onChange={Filter1}
+              onChange={Filter1}
             />
             {/* <button type="button" class="btn btn-primary  "  >
               search
@@ -66,7 +74,7 @@ const Findhome = () => {
             <input
               type="search"
               class="form-control rounded mx-1"
-              placeholder="price..."
+              placeholder="type..."
               aria-label="Search"
               aria-describedby="search-addon"
               onChange={Filter3}
@@ -76,21 +84,93 @@ const Findhome = () => {
             </button> */}
           </div>
         </div>
-        <div className="container-fluid  m-1 d-flex  flex-wrap  justify-content-center align-items-center">
+        <div className="container-fluid  m-1 d-flex  flex-wrap  justify-content-center align-items-center"  >
           {records.map((data, i) => (
             <div
-              className=" border border-danger  text-dark  my-4 mx-2 p-2"
+              className=" border border-danger  text-dark  my-4 mx-2 p-2"  
               key={i}
             >
               <img src={data.image} alt="/" />
-              <h6 className="my-3">type :{data.type}</h6>
-              <h6>location :{data.location}</h6>
-              <h6>fors :{data.for}</h6>
-              <h5>price :{data.price}</h5>
+              <h6 className="my-3">Type :{data.type}</h6>
+              <h6>Location:{data.location}</h6>
+              <h6>For:{data.for}</h6>
+              <h5>Price:{data.price}</h5>
               <button className="btn btn-danger btn-sm">More</button>
-              <button className="btn btn-success mx-4 btn-sm">
+              {/* <button className="btn btn-success mx-4 btn-sm" >
+                Contact Agent
+              </button> */}
+              {/* Agent button */}
+              <button
+                type="button"
+                className="btn btn-success mx-2"
+                data-bs-toggle="modal"
+                data-bs-target="#agentModal"
+              >
                 Contact Agent
               </button>
+
+              {/* Agent form */}
+              <div
+                className="modal fade"
+                id="agentModal"
+                tabindex="-1"
+                aria-labelledby="agentModalLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h1 className="modal-title fs-5" id="agentModalLabel">
+                        Contact to Agent
+                      </h1>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div className="modal-body">
+                      <form>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">
+                            Name
+                          </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                          />
+                          <label for="exampleInputEmail1" class="form-label">
+                            Email address
+                          </label>
+                          <input
+                            type="email"
+                            class="form-control"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                          />
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">
+                            Mesaage/Querry
+                          </label>
+                          <textarea
+                            type="text"
+                            class="form-control"
+                            id="exampleInputPassword1"
+                          />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                          Submit
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div> 
+              </div>
 
               <div class="form-check form-switch my-2">
                 <label class="form-check-label" for="flexSwitchCheckDefault">

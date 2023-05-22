@@ -1,11 +1,16 @@
-import React from "react";
-import cust1 from "../images/cust1.jpeg";
-import cust2 from "../images/cust2.jpeg";
-import cust3 from "../images/cust3.jpeg";
+import React ,{useEffect} from "react";
+import cust1 from "../images/customer1.jpeg";
+import cust2 from "../images/customer2.jpeg";
+import cust3 from "../images/customer3.jpeg";
+import AOS from "aos";
+import 'aos/dist/aos.css'
 const About = () => {
+  useEffect(()=>{
+    AOS.init({duration: 1000});
+  },[])
   return (
     <>
-      <div className="  container-fluid  d-flex flex-column  flex-wrap  justify-content-around align-items-center">
+      <div className="  container-fluid  d-flex flex-column  flex-wrap  justify-content-around align-items-center"  data-AOS="fade-up">
         <h2 className="text-danger m-4 fs-1">About Us</h2>
         <b className="container ">
           Welcome to HomeFinder, a trusted and experienced real estate partner
@@ -23,7 +28,7 @@ const About = () => {
         <h4>Our Happy Customers</h4>
 
         <div className=" m-4 p-4 w-100 container  d-flex  flex-row   flex-wrap  justify-content-center align-items-center">
-          <div className=" m-3  d-flex  justify-content-center align-items-center border-4 border border-danger-subtle bg-white rounded">
+          <div className=" m-3  d-flex  justify-content-center align-items-center border-4 border border-danger-subtle bg-white rounded"  data-AOS="fade-right">
             <img src={cust1} alt="" className="m-2"/>
             <div className="m-2">
               <h6>Harry Brook</h6>
@@ -35,7 +40,7 @@ const About = () => {
               </p>
             </div>
           </div>
-          <div className="m-3   d-flex flex-row justify-content-center align-items-center  border border-4 border-danger-subtle shadow  bg-white rounded">
+          <div className="m-3   d-flex flex-row justify-content-center align-items-center  border border-4 border-danger-subtle shadow  bg-white rounded"  data-AOS="fade-left">
             <img src={cust2} alt="" className="m-2"/>
             <div className="m-2">
               <h6>Liya Andrew</h6>
@@ -47,7 +52,7 @@ const About = () => {
               </p>
             </div>
           </div>
-          <div className="m-3   d-flex flex-row justify-content-center align-items-center  border border-4 border-danger-subtle shadow  bg-white rounded">
+          <div className="m-3   d-flex flex-row justify-content-center align-items-center  border border-4 border-danger-subtle shadow  bg-white rounded"  data-AOS="fade-right">
             <img src={cust3} alt="" className="m-2"/>
             <div className="m-2">
               <h6>Rahul</h6>
