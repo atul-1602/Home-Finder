@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import PropertyCard from './PropertyCard';
+import { useRouter } from 'next/navigation';
 
 const PropertySection = ({ title, subtitle, fetchFunction, loadingText = "Loading properties..." }) => {
+  const router = useRouter();
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -111,7 +113,7 @@ const PropertySection = ({ title, subtitle, fetchFunction, loadingText = "Loadin
         </div>
         
         <div className="text-center mt-8">
-          <button className="btn btn-primary">
+          <button className="btn btn-primary" onClick={() => router.push('/findhome')}>
             View All Properties
           </button>
         </div>

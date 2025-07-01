@@ -114,7 +114,6 @@ export default function FindHomePage() {
   if (loading) {
     return (
       <>
-        <Navbar />
         <div className="pt-16 min-h-screen bg-gray-50">
           <div className="container-custom py-12">
             <div className="flex justify-center items-center">
@@ -123,7 +122,6 @@ export default function FindHomePage() {
             </div>
           </div>
         </div>
-        <Footer />
       </>
     );
   }
@@ -131,7 +129,6 @@ export default function FindHomePage() {
   if (error) {
     return (
       <>
-        <Navbar />
         <div className="pt-16 min-h-screen bg-gray-50">
           <div className="container-custom py-12">
             <div className="text-center">
@@ -142,14 +139,12 @@ export default function FindHomePage() {
             </div>
           </div>
         </div>
-        <Footer />
       </>
     );
   }
 
   return (
     <>
-      <Navbar />
       <div className="pt-16 min-h-screen bg-gray-50">
         <div className="container-custom py-8">
           {/* Page Header */}
@@ -263,7 +258,6 @@ export default function FindHomePage() {
           )}
         </div>
       </div>
-      <Footer />
     </>
   );
 } 

@@ -4,10 +4,6 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Findhome from '../components/Findhome';
-import Pricing from '../components/Pricing';
-import About from '../components/About';
-import Contact from '../components/Contact';
 import PropertySection from '../components/PropertySection';
 import { getFeaturedProperties, getRecentProperties, getTopRatedProperties } from '../lib/api';
 
@@ -43,9 +39,7 @@ const Home = () => {
   }, [slides.length]);
 
   return (
-    <>
-      <Navbar />
-      
+    <>      
       {/* Hero Carousel */}
       <div className="relative h-screen mt-16">
         {slides.map((slide, index) => (
@@ -126,12 +120,69 @@ const Home = () => {
         fetchFunction={getTopRatedProperties}
       />
 
-      {/* Content Sections */}
-      <Findhome />
-      <Pricing />
-      <About />
-      <Contact />
-      <Footer />
+      {/* Quick Links Section */}
+      <section className="section-padding bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Explore More
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Discover all the features and services we offer to help you find your perfect home
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Find Home Card */}
+            <div className="bg-gray-50 rounded-lg p-8 text-center hover:shadow-lg transition-shadow duration-300">
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Find Your Home</h3>
+              <p className="text-gray-600 mb-6">
+                Browse through thousands of properties with advanced filters and search options
+              </p>
+              <a href="/findhome" className="btn btn-primary">
+                Start Searching
+              </a>
+            </div>
+
+            {/* Pricing Card */}
+            <div className="bg-gray-50 rounded-lg p-8 text-center hover:shadow-lg transition-shadow duration-300">
+              <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Pricing Plans</h3>
+              <p className="text-gray-600 mb-6">
+                Choose from our flexible pricing plans designed to meet your needs
+              </p>
+              <a href="/pricing" className="btn btn-secondary">
+                View Plans
+              </a>
+            </div>
+
+            {/* Contact Card */}
+            <div className="bg-gray-50 rounded-lg p-8 text-center hover:shadow-lg transition-shadow duration-300">
+              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Get in Touch</h3>
+              <p className="text-gray-600 mb-6">
+                Have questions? Our team is here to help you find your perfect home
+              </p>
+              <a href="/contact" className="btn btn-accent">
+                Contact Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
