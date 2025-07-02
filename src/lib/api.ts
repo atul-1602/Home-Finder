@@ -1,7 +1,11 @@
 import { Property, PropertyFilters } from './types';
 import { supabase } from '../config/supabaseClient';
 
-export const getProperties = async (filters?: PropertyFilters): Promise<{ properties: Property[], total: number, hasMore: boolean }> => {
+export const getProperties = async (
+  filters?: PropertyFilters, 
+  limit: number = 20, 
+  offset: number = 0
+): Promise<{ properties: Property[], total: number, hasMore: boolean }> => {
   try {
     let query = supabase
       .from('property')
@@ -44,6 +48,9 @@ export const getProperties = async (filters?: PropertyFilters): Promise<{ proper
       query = query.order('posteddate', { ascending: false });
     }
 
+    // Apply pagination
+    query = query.range(offset, offset + limit - 1);
+
     const { data: properties, error, count } = await query;
 
     if (error) {
@@ -52,11 +59,12 @@ export const getProperties = async (filters?: PropertyFilters): Promise<{ proper
     }
 
     const total = count || 0;
+    const hasMore = offset + limit < total;
 
     return {
       properties: properties || [],
       total,
-      hasMore: false // No pagination for now
+      hasMore
     };
   } catch (error) {
     console.error('Error in getProperties:', error);
@@ -84,13 +92,17 @@ export const getPropertyById = async (id: number): Promise<Property | null> => {
   }
 };
 
-export const getFeaturedProperties = async (): Promise<{ properties: Property[], total: number, hasMore: boolean }> => {
+export const getFeaturedProperties = async (
+  limit: number = 20, 
+  offset: number = 0
+): Promise<{ properties: Property[], total: number, hasMore: boolean }> => {
   try {
     const { data: properties, error, count } = await supabase
       .from('property')
       .select('*', { count: 'exact' })
       .eq('isfeatured', true)
-      .order('posteddate', { ascending: false });
+      .order('posteddate', { ascending: false })
+      .range(offset, offset + limit - 1);
 
     if (error) {
       console.error('Error fetching featured properties:', error);
@@ -98,11 +110,12 @@ export const getFeaturedProperties = async (): Promise<{ properties: Property[],
     }
 
     const total = count || 0;
+    const hasMore = offset + limit < total;
 
     return {
       properties: properties || [],
       total,
-      hasMore: false
+      hasMore
     };
   } catch (error) {
     console.error('Error in getFeaturedProperties:', error);
@@ -110,12 +123,16 @@ export const getFeaturedProperties = async (): Promise<{ properties: Property[],
   }
 };
 
-export const getRecentProperties = async (): Promise<{ properties: Property[], total: number, hasMore: boolean }> => {
+export const getRecentProperties = async (
+  limit: number = 20, 
+  offset: number = 0
+): Promise<{ properties: Property[], total: number, hasMore: boolean }> => {
   try {
     const { data: properties, error, count } = await supabase
       .from('property')
       .select('*', { count: 'exact' })
-      .order('posteddate', { ascending: false });
+      .order('posteddate', { ascending: false })
+      .range(offset, offset + limit - 1);
 
     if (error) {
       console.error('Error fetching recent properties:', error);
@@ -123,11 +140,12 @@ export const getRecentProperties = async (): Promise<{ properties: Property[], t
     }
 
     const total = count || 0;
+    const hasMore = offset + limit < total;
 
     return {
       properties: properties || [],
       total,
-      hasMore: false
+      hasMore
     };
   } catch (error) {
     console.error('Error in getRecentProperties:', error);
@@ -135,12 +153,16 @@ export const getRecentProperties = async (): Promise<{ properties: Property[], t
   }
 };
 
-export const getTopRatedProperties = async (): Promise<{ properties: Property[], total: number, hasMore: boolean }> => {
+export const getTopRatedProperties = async (
+  limit: number = 20, 
+  offset: number = 0
+): Promise<{ properties: Property[], total: number, hasMore: boolean }> => {
   try {
     const { data: properties, error, count } = await supabase
       .from('property')
       .select('*', { count: 'exact' })
-      .order('price', { ascending: false }); // For demo, consider higher price as "top rated"
+      .order('price', { ascending: false }) // For demo, consider higher price as "top rated"
+      .range(offset, offset + limit - 1);
 
     if (error) {
       console.error('Error fetching top rated properties:', error);
@@ -148,11 +170,12 @@ export const getTopRatedProperties = async (): Promise<{ properties: Property[],
     }
 
     const total = count || 0;
+    const hasMore = offset + limit < total;
 
     return {
       properties: properties || [],
       total,
-      hasMore: false
+      hasMore
     };
   } catch (error) {
     console.error('Error in getTopRatedProperties:', error);

@@ -4,28 +4,31 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import PropertySection from '../components/PropertySection';
 import { getFeaturedPropertiesForHome, getRecentPropertiesForHome, getTopRatedPropertiesForHome } from '../lib/api';
-
+import { useRouter } from 'next/navigation';
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  const router = useRouter();
   const slides = [
     {
       image: '/images/img4.jpeg',
       title: 'Flats',
       buttonText: 'Explore More',
-      buttonClass: 'bg-green-600 hover:bg-green-700'
+      buttonClass: 'bg-green-600 hover:bg-green-700',
+      href: '/findhome'
     },
     {
       image: '/images/img5.jpeg',
       title: 'Villas',
       buttonText: 'Explore More',
-      buttonClass: 'bg-red-600 hover:bg-red-700'
+      buttonClass: 'bg-red-600 hover:bg-red-700',
+      href: '/findhome'
     },
     {
       image: '/images/img6.jpeg',
       title: 'Apartments',
       buttonText: 'Explore More',
-      buttonClass: 'bg-green-600 hover:bg-green-700'
+      buttonClass: 'bg-green-600 hover:bg-green-700',
+      href: '/findhome'
     }
   ];
 
@@ -57,7 +60,7 @@ const Home = () => {
             <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
               <div className="text-center text-white">
                 <h2 className="text-5xl md:text-7xl font-bold mb-6">{slide.title}</h2>
-                <button className={`px-8 py-3 text-white rounded-md text-lg font-medium ${slide.buttonClass}`}>
+                <button className={`px-8 py-3 text-white rounded-md text-lg font-medium ${slide.buttonClass}`} onClick={() => router.push(slide.href)}>
                   {slide.buttonText}
                 </button>
               </div>

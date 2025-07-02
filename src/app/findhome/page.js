@@ -9,27 +9,47 @@ import { getProperties } from '../../lib/api';
 const FindHome = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
   const [filters, setFilters] = useState({});
+  const [hasMore, setHasMore] = useState(false);
+  const [offset, setOffset] = useState(0);
+  const [total, setTotal] = useState(0);
+  const limit = 20;
 
-  const loadProperties = useCallback(async () => {
+  const loadProperties = useCallback(async (isLoadMore = false) => {
     try {
-      setLoading(true);
+      if (isLoadMore) {
+        setLoadingMore(true);
+      } else {
+        setLoading(true);
+        setOffset(0);
+      }
       
-      const result = await getProperties(filters);
+      const currentOffset = isLoadMore ? offset : 0;
+      const result = await getProperties(filters, limit, currentOffset);
       
-      setProperties(result.properties);
+      if (isLoadMore) {
+        setProperties(prev => [...prev, ...result.properties]);
+      } else {
+        setProperties(result.properties);
+      }
+      
+      setHasMore(result.hasMore);
+      setTotal(result.total);
+      setOffset(currentOffset + limit);
     } catch (err) {
       setError('Failed to load properties');
       console.error('Error loading properties:', err);
     } finally {
       setLoading(false);
+      setLoadingMore(false);
     }
-  }, [filters]);
+  }, [filters, offset]);
 
   useEffect(() => {
     loadProperties();
-  }, [loadProperties]);
+  }, [filters]);
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
@@ -37,6 +57,10 @@ const FindHome = () => {
 
   const handleClearFilters = () => {
     setFilters({});
+  };
+
+  const handleLoadMore = () => {
+    loadProperties(true);
   };
 
   return (
@@ -86,11 +110,36 @@ const FindHome = () => {
             <p className="text-gray-600">No properties found matching your criteria.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {properties?.map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {properties?.map((property) => (
+                <PropertyCard key={property.id} property={property} />
+              ))}
+            </div>
+            
+            {/* Load More Section */}
+            {hasMore && (
+              <div className="text-center mt-12">
+                {loadingMore ? (
+                  <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-red-600"></div>
+                ) : (
+                  <button
+                    onClick={handleLoadMore}
+                    className="px-8 py-3 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors duration-200 font-medium"
+                  >
+                    Load More Properties
+                  </button>
+                )}
+              </div>
+            )}
+            
+            {/* Results Count */}
+            {properties.length > 0 && (
+              <div className="text-center mt-8 text-gray-600">
+                Showing {properties.length} of {total} properties
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

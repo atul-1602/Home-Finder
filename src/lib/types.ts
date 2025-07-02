@@ -30,4 +30,6 @@ export interface PropertyFilters {
   availability?: string;
   sortBy?: 'price' | 'posteddate' | 'area' | 'created_at';
   sortOrder?: 'asc' | 'desc';
+  limit?: number;
+  offset?: number;
 } 
