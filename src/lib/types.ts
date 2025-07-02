@@ -6,16 +6,18 @@ export interface Property {
   bedrooms?: number;
   bathrooms?: number;
   area?: number;
-  imageUrl?: string;
+  image_url?: string;
   furnishing?: string;
   availability?: string;
   amenities?: string;
   description?: string;
   contact_name?: string;
   contact_phone?: string;
-  postedDate?: string;
-  isFeatured?: boolean;
+  posteddate?: string;
+  isfeatured?: boolean;
   tags?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface PropertyFilters {
@@ -26,6 +28,6 @@ export interface PropertyFilters {
   bathrooms?: number;
   furnishing?: string;
   availability?: string;
-  sortBy?: 'price' | 'postedDate' | 'area';
+  sortBy?: 'price' | 'posteddate' | 'area' | 'created_at';
   sortOrder?: 'asc' | 'desc';
 } 

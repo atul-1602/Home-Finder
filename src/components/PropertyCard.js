@@ -2,9 +2,11 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const PropertyCard = ({ property }) => {
   const [imageError, setImageError] = useState(false);
+  const router = useRouter();
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('en-IN', {
@@ -28,13 +30,26 @@ const PropertyCard = ({ property }) => {
     return amenities.split(',').slice(0, 3); // Show only first 3 amenities
   };
 
+  const handleCardClick = () => {
+    router.push(`/property/${property.id}`);
+  };
+
+  const handleContactClick = (e) => {
+    e.stopPropagation(); // Prevent card click when clicking contact button
+    // You can add contact functionality here
+    console.log('Contact clicked for property:', property.id);
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+    <div 
+      className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+      onClick={handleCardClick}
+    >
       {/* Property Image */}
       <div className="relative h-48 bg-gray-200">
         {!imageError ? (
           <Image
-            src={property.imageUrl || '/images/img4.jpeg'}
+            src={property.image_url || '/images/img4.jpeg'}
             alt={property.title}
             fill
             className="object-cover"
@@ -49,8 +64,8 @@ const PropertyCard = ({ property }) => {
         )}
         
         {/* Featured Badge */}
-        {property.isFeatured && (
-          <div className="absolute top-2 left-2 bg-primary text-white px-2 py-1 rounded-md text-xs font-semibold">
+        {property.is_featured && (
+          <div className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded-md text-xs font-semibold">
             Featured
           </div>
         )}
@@ -69,7 +84,7 @@ const PropertyCard = ({ property }) => {
         </h3>
 
         {/* Price */}
-        <div className="text-2xl font-bold text-primary mb-3">
+        <div className="text-2xl font-bold text-red-600 mb-3">
           {formatPrice(property.price)}
           <span className="text-sm text-gray-600 font-normal">/month</span>
         </div>
@@ -135,7 +150,7 @@ const PropertyCard = ({ property }) => {
 
         {/* Posted Date */}
         <div className="text-xs text-gray-500 mb-3">
-          Posted: {property.postedDate ? formatDate(property.postedDate) : 'Recently'}
+          Posted: {property.posted_date ? formatDate(property.posted_date) : 'Recently'}
         </div>
 
         {/* Contact Info */}
@@ -148,7 +163,10 @@ const PropertyCard = ({ property }) => {
                   <p className="text-sm text-gray-600">{property.contact_phone}</p>
                 )}
               </div>
-              <button className="btn btn-primary text-sm px-4 py-2">
+              <button 
+                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 text-sm"
+                onClick={handleContactClick}
+              >
                 Contact
               </button>
             </div>

@@ -175,7 +175,7 @@ const PropertyFilters = ({ filters, onFiltersChange, onClearFilters }) => {
                 >
                   <option value="">No Sorting</option>
                   <option value="price">Price</option>
-                  <option value="postedDate">Posted Date</option>
+                  <option value="posteddate">Posted Date</option>
                   <option value="area">Area</option>
                 </select>
               </div>
