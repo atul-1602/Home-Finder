@@ -64,22 +64,22 @@ const FindHome = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-neutral-50">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      <div className="bg-white shadow-sm border-b border-neutral-200">
+        <div className="container-custom py-8">
+          <h1 className="heading-responsive font-bold text-neutral-900 mb-4 line-clamp-1">
             Find Your Perfect Home
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl">
+          <p className="text-lg text-neutral-600 max-w-2xl">
             Discover thousands of properties with advanced search and filtering options
           </p>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="bg-white border-b border-neutral-200">
+        <div className="container-custom py-6">
           <PropertyFilters
             filters={filters}
             onFiltersChange={handleFilterChange}
@@ -89,25 +89,25 @@ const FindHome = () => {
       </div>
 
       {/* Properties Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="container-custom py-12">
         {loading ? (
           <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
-            <p className="mt-4 text-gray-600">Loading properties...</p>
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+            <p className="mt-4 text-neutral-600">Loading properties...</p>
           </div>
         ) : error ? (
           <div className="text-center py-12">
-            <p className="text-red-600">{error}</p>
+            <p className="text-accent-600">{error}</p>
             <button 
               onClick={() => loadProperties()}
-              className="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+              className="btn btn-primary mt-4"
             >
               Try Again
             </button>
           </div>
         ) : properties.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-600">No properties found matching your criteria.</p>
+            <p className="text-neutral-600">No properties found matching your criteria.</p>
           </div>
         ) : (
           <>
@@ -121,11 +121,11 @@ const FindHome = () => {
             {hasMore && (
               <div className="text-center mt-12">
                 {loadingMore ? (
-                  <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-red-600"></div>
+                  <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-primary-600"></div>
                 ) : (
                   <button
                     onClick={handleLoadMore}
-                    className="px-8 py-3 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors duration-200 font-medium"
+                    className="btn btn-primary"
                   >
                     Load More Properties
                   </button>
@@ -135,7 +135,7 @@ const FindHome = () => {
             
             {/* Results Count */}
             {properties.length > 0 && (
-              <div className="text-center mt-8 text-gray-600">
+              <div className="text-center mt-8 text-neutral-600">
                 Showing {properties.length} of {total} properties
               </div>
             )}

@@ -9,13 +9,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className="antialiased">
-        <Navbar />
-        <main>
-          {children}
-        </main>
-        <Footer />
+    <html lang="en" className="overflow-x-hidden">
+      <body className="antialiased overflow-x-hidden">
+        <div className="min-h-screen flex flex-col overflow-x-hidden">
+          <Navbar />
+          <main className="flex-1 pt-16 overflow-x-hidden">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   )

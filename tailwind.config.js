@@ -8,9 +8,147 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#dc2626', // red-600
-        secondary: '#16a34a', // green-600
-        accent: '#ca8a04', // yellow-600
+        // Primary - Soft Sage Green
+        primary: {
+          50: '#f6f8f5',
+          100: '#eef2ec',
+          200: '#dde7d9',
+          300: '#c4d4bc',
+          400: '#a3bc97',
+          500: '#8ba67a',
+          600: '#6f8b5f',
+          700: '#5a6f4c',
+          800: '#4a5a3f',
+          900: '#3f4b35',
+        },
+        // Secondary - Gentle Blue
+        secondary: {
+          50: '#f5f8fa',
+          100: '#eef3f7',
+          200: '#dce7ef',
+          300: '#c1d4e0',
+          400: '#9bb8c9',
+          500: '#7a9bb0',
+          600: '#5f7a8c',
+          700: '#4e6372',
+          800: '#425360',
+          900: '#3a4750',
+        },
+        // Accent - Warm Peach
+        accent: {
+          50: '#fefcf9',
+          100: '#fdf8f2',
+          200: '#faf0e1',
+          300: '#f5e2c7',
+          400: '#edcda3',
+          500: '#e4b67d',
+          600: '#d69e5f',
+          700: '#c2854a',
+          800: '#a06d3e',
+          900: '#835a36',
+        },
+        // Success - Soft Mint
+        success: {
+          50: '#f4fbf8',
+          100: '#e8f7f0',
+          200: '#d1eee0',
+          300: '#a8ddc5',
+          400: '#73c4a0',
+          500: '#4daa7d',
+          600: '#3a8a63',
+          700: '#316f51',
+          800: '#2b5a44',
+          900: '#254a3a',
+        },
+        // Warning - Gentle Amber
+        warning: {
+          50: '#fefdf8',
+          100: '#fefbe8',
+          200: '#fdf6d0',
+          300: '#faedb0',
+          400: '#f5dd7a',
+          500: '#efc94c',
+          600: '#e3b02e',
+          700: '#c08a24',
+          800: '#9a6e22',
+          900: '#7d5a21',
+        },
+        // Neutral - Warm Cream Grays
+        neutral: {
+          50: '#fefefe',
+          100: '#fafafa',
+          200: '#f5f5f5',
+          300: '#e8e8e8',
+          400: '#d1d1d1',
+          500: '#a8a8a8',
+          600: '#737373',
+          700: '#525252',
+          800: '#404040',
+          900: '#262626',
+        },
+        // Purple - Soft Lavender
+        purple: {
+          50: '#faf9ff',
+          100: '#f4f2ff',
+          200: '#ebe6ff',
+          300: '#d9d0ff',
+          400: '#c0b0ff',
+          500: '#a78bff',
+          600: '#8b5cf6',
+          700: '#7c3aed',
+          800: '#6b21a8',
+          900: '#581c87',
+        },
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-primary': 'linear-gradient(135deg, #8ba67a 0%, #6f8b5f 100%)',
+        'gradient-secondary': 'linear-gradient(135deg, #7a9bb0 0%, #5f7a8c 100%)',
+        'gradient-accent': 'linear-gradient(135deg, #e4b67d 0%, #d69e5f 100%)',
+        'gradient-warm': 'linear-gradient(135deg, #edcda3 0%, #e4b67d 100%)',
+        'gradient-cool': 'linear-gradient(135deg, #9bb8c9 0%, #7a9bb0 100%)',
+        'gradient-sunset': 'linear-gradient(135deg, #e4b67d 0%, #a78bff 100%)',
+        'gradient-ocean': 'linear-gradient(135deg, #8ba67a 0%, #7a9bb0 100%)',
+        'gradient-soft': 'linear-gradient(135deg, #f6f8f5 0%, #f5f8fa 100%)',
+        'gradient-warm-light': 'linear-gradient(135deg, #fefcf9 0%, #fdf8f2 100%)',
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'slide-up': 'slideUp 0.5s ease-out',
+        'slide-down': 'slideDown 0.5s ease-out',
+        'bounce-in': 'bounceIn 0.6s ease-out',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'float': 'float 3s ease-in-out infinite',
+        'shimmer': 'shimmer 2s linear infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideDown: {
+          '0%': { transform: 'translateY(-20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        bounceIn: {
+          '0%': { transform: 'scale(0.3)', opacity: '0' },
+          '50%': { transform: 'scale(1.05)' },
+          '70%': { transform: 'scale(0.9)' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
       },
     },
   },
