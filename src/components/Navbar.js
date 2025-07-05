@@ -10,11 +10,8 @@ const ClerkNavbar = ({ isScrolled }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleDropdownToggle = () => {
-    console.log('Dropdown toggle clicked, current state:', isDropdownOpen);
     setIsDropdownOpen(!isDropdownOpen);
   };
-
-  console.log('ClerkNavbar rendered, isDropdownOpen:', isDropdownOpen);
 
   if (isSignedIn) {
     return (

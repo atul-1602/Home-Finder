@@ -24,8 +24,7 @@ export function useUserSync() {
         const existingUser = await getUserByClerkId(clerkId);
         
         if (existingUser) {
-          console.log('User already exists in database:', clerkId);
-          return;
+          return; // User already exists
         }
 
         // Create new user in our database
@@ -36,9 +35,7 @@ export function useUserSync() {
           last_name: lastName
         });
 
-        if (newUser) {
-          console.log('Successfully synced user to database:', newUser);
-        } else {
+        if (!newUser) {
           console.error('Failed to sync user to database:', clerkId);
         }
       } catch (error) {

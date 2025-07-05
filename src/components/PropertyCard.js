@@ -40,7 +40,6 @@ const PropertyCard = ({ property }) => {
   const handleContactClick = (e) => {
     e.stopPropagation(); // Prevent card click when clicking contact button
     // You can add contact functionality here
-    console.log('Contact clicked for property:', property.id);
   };
 
   const handleFavoriteClick = (e) => {

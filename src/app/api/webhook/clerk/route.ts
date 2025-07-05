@@ -44,9 +44,6 @@ export async function POST(req: Request) {
   const { id } = evt.data;
   const eventType = evt.type;
 
-  console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
-  console.log('Webhook body:', body);
-
   // Handle the webhook
   switch (eventType) {
     case 'user.created':
@@ -59,7 +56,8 @@ export async function POST(req: Request) {
       await handleUserDeleted(evt.data);
       break;
     default:
-      console.log(`Unhandled event type: ${eventType}`);
+      // Unhandled event type - log for monitoring
+      console.error(`Unhandled webhook event type: ${eventType}`);
   }
 
   return new Response('Webhook processed successfully', { status: 200 });
@@ -67,8 +65,6 @@ export async function POST(req: Request) {
 
 async function handleUserCreated(userData: any) {
   try {
-    console.log('Handling user.created event:', userData);
-    
     const { id: clerk_id, email_addresses, first_name, last_name } = userData;
     
     // Get the primary email
@@ -84,8 +80,7 @@ async function handleUserCreated(userData: any) {
     const existingUser = await getUserByClerkId(clerk_id);
     
     if (existingUser) {
-      console.log('User already exists in database:', clerk_id);
-      return;
+      return; // User already exists
     }
 
     // Create new user in our database
@@ -96,9 +91,7 @@ async function handleUserCreated(userData: any) {
       last_name: last_name || ''
     });
 
-    if (newUser) {
-      console.log('Successfully created user in database:', newUser);
-    } else {
+    if (!newUser) {
       console.error('Failed to create user in database:', clerk_id);
     }
   } catch (error) {
@@ -108,8 +101,6 @@ async function handleUserCreated(userData: any) {
 
 async function handleUserUpdated(userData: any) {
   try {
-    console.log('Handling user.updated event:', userData);
-    
     const { id: clerk_id, email_addresses, first_name, last_name } = userData;
     
     // Get the primary email
@@ -125,7 +116,6 @@ async function handleUserUpdated(userData: any) {
     const existingUser = await getUserByClerkId(clerk_id);
     
     if (!existingUser) {
-      console.log('User not found in database, creating new user:', clerk_id);
       // Create new user if they don't exist
       await createUser({
         clerk_id,
@@ -143,9 +133,7 @@ async function handleUserUpdated(userData: any) {
       last_name: last_name || ''
     });
 
-    if (updatedUser) {
-      console.log('Successfully updated user in database:', updatedUser);
-    } else {
+    if (!updatedUser) {
       console.error('Failed to update user in database:', clerk_id);
     }
   } catch (error) {
@@ -155,27 +143,22 @@ async function handleUserUpdated(userData: any) {
 
 async function handleUserDeleted(userData: any) {
   try {
-    console.log('Handling user.deleted event:', userData);
-    
     const { id: clerk_id } = userData;
     
     // Check if user exists in our database
     const existingUser = await getUserByClerkId(clerk_id);
     
     if (!existingUser) {
-      console.log('User not found in database for deletion:', clerk_id);
-      return;
+      return; // User not found in database
     }
 
     // Note: You might want to implement soft delete instead of hard delete
-    // For now, we'll just log the deletion
-    console.log('User deleted from Clerk, consider handling in database:', clerk_id);
+    // For now, we'll just log the deletion for monitoring
+    console.error('User deleted from Clerk, consider handling in database:', clerk_id);
     
     // If you want to actually delete the user from your database, uncomment this:
     // const success = await deleteUser(existingUser.id);
-    // if (success) {
-    //   console.log('Successfully deleted user from database:', clerk_id);
-    // } else {
+    // if (!success) {
     //   console.error('Failed to delete user from database:', clerk_id);
     // }
   } catch (error) {

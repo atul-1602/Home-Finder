@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -14,13 +14,7 @@ export default function FavoritesPage() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  useEffect(() => {
-    if (isLoaded && user) {
-      fetchFavorites();
-    }
-  }, [isLoaded, user]);
-
-  const fetchFavorites = async () => {
+  const fetchFavorites = useCallback(async () => {
     if (!user) return;
 
     setLoading(true);
@@ -40,7 +34,13 @@ export default function FavoritesPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (isLoaded && user) {
+      fetchFavorites();
+    }
+  }, [isLoaded, user, fetchFavorites]);
 
   const handleRemoveFavorite = (isFavorited: boolean) => {
     if (!isFavorited) {

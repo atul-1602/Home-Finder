@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { isPropertyFavorited } from '../lib/api';
 
@@ -15,14 +15,7 @@ export default function FavoriteButton({ propertyId, onToggle, className = '' }:
   const [isFavorited, setIsFavorited] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Check if property is favorited on component mount
-  useEffect(() => {
-    if (isLoaded && user) {
-      checkFavoriteStatus();
-    }
-  }, [isLoaded, user, propertyId]);
-
-  const checkFavoriteStatus = async () => {
+  const checkFavoriteStatus = useCallback(async () => {
     if (!user) return;
     
     try {
@@ -31,7 +24,14 @@ export default function FavoriteButton({ propertyId, onToggle, className = '' }:
     } catch (error) {
       console.error('Error checking favorite status:', error);
     }
-  };
+  }, [user, propertyId]);
+
+  // Check if property is favorited on component mount
+  useEffect(() => {
+    if (isLoaded && user) {
+      checkFavoriteStatus();
+    }
+  }, [isLoaded, user, checkFavoriteStatus]);
 
   const toggleFavorite = async () => {
     if (!user || loading) return;
