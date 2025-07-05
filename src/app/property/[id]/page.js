@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { getPropertyById } from '../../../lib/api';
+import FavoriteButton from '../../../components/FavoriteButton';
 
 const PropertyDetails = () => {
   const params = useParams();
@@ -278,14 +279,18 @@ const PropertyDetails = () => {
               <h3 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h3>
               
               <div className="space-y-3">
-                <button className="w-full text-left p-3 rounded-md hover:bg-gray-50 transition-colors">
+                <div className="flex items-center justify-between p-3 rounded-md hover:bg-gray-50 transition-colors">
                   <div className="flex items-center">
                     <svg className="w-5 h-5 text-gray-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                     <span className="text-gray-700">Add to Favorites</span>
                   </div>
-                </button>
+                  <FavoriteButton
+                    propertyId={property.id}
+                    className="text-gray-600 hover:text-red-500"
+                  />
+                </div>
                 
                 <button className="w-full text-left p-3 rounded-md hover:bg-gray-50 transition-colors">
                   <div className="flex items-center">

@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import FavoriteButton from './FavoriteButton';
 
 const PropertyCard = ({ property }) => {
   const [imageError, setImageError] = useState(false);
@@ -42,6 +43,10 @@ const PropertyCard = ({ property }) => {
     console.log('Contact clicked for property:', property.id);
   };
 
+  const handleFavoriteClick = (e) => {
+    e.stopPropagation(); // Prevent card click when clicking favorite button
+  };
+
   return (
     <div 
       className="card group cursor-pointer overflow-hidden flex flex-col h-full"
@@ -72,9 +77,17 @@ const PropertyCard = ({ property }) => {
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         
+        {/* Favorite Button */}
+        <div className="absolute top-3 left-3 z-10" onClick={handleFavoriteClick}>
+          <FavoriteButton
+            propertyId={property.id}
+            className="bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg hover:bg-white transition-all duration-200"
+          />
+        </div>
+        
         {/* Featured Badge */}
         {property.isfeatured && (
-          <div className="absolute top-3 left-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg animate-pulse">
+          <div className="absolute top-3 right-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg animate-pulse">
             <svg className="w-3 h-3 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
@@ -83,7 +96,7 @@ const PropertyCard = ({ property }) => {
         )}
         
         {/* Property Type Badge */}
-        <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm text-neutral-800 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
+        <div className={`absolute ${property.isfeatured ? 'top-12 right-3' : 'top-3 right-3'} bg-white/95 backdrop-blur-sm text-neutral-800 px-3 py-1 rounded-full text-xs font-semibold shadow-lg`}>
           {property.type}
         </div>
 

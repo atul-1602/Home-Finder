@@ -32,4 +32,24 @@ export interface PropertyFilters {
   sortOrder?: 'asc' | 'desc';
   limit?: number;
   offset?: number;
+}
+
+export interface User {
+  id: string;
+  clerk_id: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  created_at: string;
+  favourites?: number[];
+}
+
+export interface UserFilters {
+  email?: string;
+  first_name?: string;
+  last_name?: string;
+  sortBy?: 'created_at' | 'first_name' | 'last_name' | 'email';
+  sortOrder?: 'asc' | 'desc';
+  limit?: number;
+  offset?: number;
 } 
