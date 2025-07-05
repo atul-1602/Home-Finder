@@ -1,11 +1,11 @@
 # HomeFinder - Modern Real Estate Platform
 
 A comprehensive, production-ready real estate application built with Next.js 14, featuring user authentication, property management, favorites system, and a beautiful responsive design.
-<img width="1503" alt="Screenshot 2025-07-05 at 3 22 09 PM" src="https://github.com/user-attachments/assets/0ddf3b75-e94b-47a7-bacd-bb159f378d8a" />
-<img width="1512" alt="Screenshot 2025-07-05 at 3 22 49 PM" src="https://github.com/user-attachments/assets/4873b0fa-7145-4c28-8aea-4e867a24eb04" />
-<img width="1512" alt="Screenshot 2025-07-05 at 3 23 24 PM" src="https://github.com/user-attachments/assets/14988bff-6b7e-400c-b2d0-f57233440d93" />
-<img width="1512" alt="Screenshot 2025-07-05 at 3 23 11 PM" src="https://github.com/user-attachments/assets/9be569f6-e2a0-443b-997c-b6c505b095df" />
-<img width="1512" alt="Screenshot 2025-07-05 at 3 22 39 PM" src="https://github.com/user-attachments/assets/787aef69-8921-46a5-aeac-eaf808ab6f24" />
+<img width="600" alt="Screenshot 2025-07-05 at 3 22 09 PM" src="https://github.com/user-attachments/assets/0ddf3b75-e94b-47a7-bacd-bb159f378d8a" />
+<img width="600" alt="Screenshot 2025-07-05 at 3 22 49 PM" src="https://github.com/user-attachments/assets/4873b0fa-7145-4c28-8aea-4e867a24eb04" />
+<img width="600" alt="Screenshot 2025-07-05 at 3 23 24 PM" src="https://github.com/user-attachments/assets/14988bff-6b7e-400c-b2d0-f57233440d93" />
+<img width="600" alt="Screenshot 2025-07-05 at 3 23 11 PM" src="https://github.com/user-attachments/assets/9be569f6-e2a0-443b-997c-b6c505b095df" />
+<img width="600" alt="Screenshot 2025-07-05 at 3 22 39 PM" src="https://github.com/user-attachments/assets/787aef69-8921-46a5-aeac-eaf808ab6f24" />
 
 ## 🚀 Features
 
