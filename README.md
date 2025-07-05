@@ -1,6 +1,7 @@
 # HomeFinder - Modern Real Estate Platform
 
 A comprehensive, production-ready real estate application built with Next.js 14, featuring user authentication, property management, favorites system, and a beautiful responsive design.
+
 <img width="600" alt="Screenshot 2025-07-05 at 3 22 09 PM" src="https://github.com/user-attachments/assets/0ddf3b75-e94b-47a7-bacd-bb159f378d8a" />
 <img width="600" alt="Screenshot 2025-07-05 at 3 22 49 PM" src="https://github.com/user-attachments/assets/4873b0fa-7145-4c28-8aea-4e867a24eb04" />
 <img width="600" alt="Screenshot 2025-07-05 at 3 23 24 PM" src="https://github.com/user-attachments/assets/14988bff-6b7e-400c-b2d0-f57233440d93" />
